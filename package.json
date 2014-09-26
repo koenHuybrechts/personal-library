@@ -1,0 +1,40 @@
+{
+  "name": "personal-library",
+  "version": "0.1.0",
+  "description": "API to manage your personal (book) library",
+  "main": "server",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/koenHuybrechts/personal-library.git"
+  },
+  "keywords": [
+    "library",
+    "books",
+    "personal",
+    "catalogue",
+    "book",
+    "catalogue",
+    "book",
+    "library"
+  ],
+  "author": "koenHuybrechts",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/koenHuybrechts/personal-library/issues"
+  },
+  "homepage": "https://github.com/koenHuybrechts/personal-library",
+  "dependencies": {
+    "body-parser": "^1.9.0",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.3.3",
+    "express": "^4.9.5",
+    "express-session": "^1.8.2",
+    "mongoose": "^3.8.16",
+    "morgan": "^1.3.1",
+    "passport": "^0.2.1",
+    "passport-facebook": "^1.0.3"
+  }
+}
