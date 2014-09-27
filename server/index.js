@@ -3,8 +3,10 @@ var config = require('./config'),
   session = require('express-session'),
   cookieParser = require('cookie-parser'),
   bodyParser = require('body-parser'),
-  morgan = require('morgan');
+  morgan = require('morgan'),
+  mongoose = require('mongoose');
 
+mongoose.connect(config.database);
 
 var app = express();
 app.use(morgan('dev'));
