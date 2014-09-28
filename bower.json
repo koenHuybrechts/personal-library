@@ -1,0 +1,19 @@
+{
+  "name": "personal-library",
+  "version": "0.1.0",
+  "homepage": "https://github.com/koenHuybrechts/personal-library",
+  "authors": [
+    "koen Huybrechts <koen@appsaloon.be>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.2.0"
+  }
+}
