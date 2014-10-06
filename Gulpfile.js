@@ -28,4 +28,10 @@ gulp.task('copy', function() {
     .pipe(gulp.dest('./.build'));
 });
 
+gulp.task('js', function () {
+  return gulp.src('client/browser/js/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'))
+});
+
 gulp.task('browser', ['scripts', 'copy']);
