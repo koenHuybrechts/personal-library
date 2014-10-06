@@ -19,6 +19,8 @@ app.use(session({
   saveUninitialized: 'true'
 }));
 
+app.use(express.static(__dirname + '/../.build'));
+
 
 // routes ======================================================================
 require('./routes.js')(app); // load our routes and pass in our app and fully configured passport

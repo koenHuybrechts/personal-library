@@ -2,7 +2,6 @@
 var gulp = require('gulp'),
   nodemon = require('gulp-nodemon'),
   jshint = require('gulp-jshint'),
-  del = require('del'),
   browserify = require('gulp-browserify');
 
 gulp.task('lint', function () {
@@ -18,12 +17,15 @@ gulp.task('develop', function () {
     })
 });
 
-gulp.task('clean', function(cb) {
-  del(['./.build'], cb);
+gulp.task('scripts', function() {
+  gulp.src(['client/browser/js/main.js'])
+    .pipe(browserify())
+    .pipe(gulp.dest('./.build/js'));
 });
 
-gulp.task('scripts', function() {
-  gulp.src(['client/browser/main.js'])
-    .pipe(browserify())
-    .pipe(gulp.dest('./.build/js'))
+gulp.task('copy', function() {
+  gulp.src(['client/browser/index.html'])
+    .pipe(gulp.dest('./.build'));
 });
+
+gulp.task('browser', ['scripts', 'copy']);
