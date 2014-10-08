@@ -1,14 +1,18 @@
-var config = require('./config'),
+var config = require('./config/main'),
+  pass = require('./config/pass'),
+  path = require('path'),
   express = require('express'),
   session = require('express-session'),
   cookieParser = require('cookie-parser'),
   bodyParser = require('body-parser'),
   morgan = require('morgan'),
-  mongoose = require('mongoose');
+  mongoose = require('mongoose'),
+  passport = require('passport');
 
 mongoose.connect(config.database);
 
 var app = express();
+app.use(express.static(path.join(__dirname, '/../.build')));
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -19,11 +23,15 @@ app.use(session({
   saveUninitialized: 'true'
 }));
 
-app.use(express.static(__dirname + '/../.build'));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 
 
 // routes ======================================================================
-require('./routes.js')(app); // load our routes and pass in our app and fully configured passport
+require('./routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 // launch ======================================================================
 app.listen(config.port || 3000);

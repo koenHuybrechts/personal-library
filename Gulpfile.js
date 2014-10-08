@@ -25,7 +25,7 @@ gulp.task('scripts', function() {
 });
 
 gulp.task('copy', function() {
-  gulp.src(['client/browser/index.html'])
+  gulp.src(['client/browser/*.html'])
     .pipe(gulp.dest('./.build'));
 });
 
