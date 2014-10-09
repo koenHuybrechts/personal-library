@@ -3,7 +3,9 @@ var gulp = require('gulp'),
   nodemon = require('gulp-nodemon'),
   jshint = require('gulp-jshint'),
   browserify = require('gulp-browserify'),
-  watch = require('gulp-watch');
+  watch = require('gulp-watch'),
+  less = require('gulp-less'),
+  rename = require('gulp-rename');
 
 gulp.task('lint', function () {
   gulp.src('./**/*.js')
@@ -35,8 +37,15 @@ gulp.task('js', function () {
     .pipe(jshint.reporter('default'))
 });
 
+gulp.task('less', function(){
+  return gulp.src('client/browser/less/**.less')
+    .pipe(less())
+    .pipe(rename('style.css'))
+    .pipe(gulp.dest('./.build/css'));
+});
+
 gulp.task('watch', function () {
   gulp.watch('client/browser/js/*.js', ['browser']);
 });
 
-gulp.task('browser', ['scripts', 'copy']);
+gulp.task('browser', ['scripts', 'less', 'copy']);

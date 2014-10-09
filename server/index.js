@@ -3,13 +3,14 @@ var config = require('./config/main'),
   path = require('path'),
   express = require('express'),
   session = require('express-session'),
+  MongoStore = require('connect-mongo')(session),
   cookieParser = require('cookie-parser'),
   bodyParser = require('body-parser'),
   morgan = require('morgan'),
   mongoose = require('mongoose'),
   passport = require('passport');
 
-mongoose.connect(config.database);
+mongoose.connect(config.server + config.database);
 
 var app = express();
 app.use(express.static(path.join(__dirname, '/../.build')));
@@ -20,15 +21,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
   secret: 'azerty',
   resave: true,
-  saveUninitialized: 'true'
+  saveUninitialized: 'true',
+  store: new MongoStore({
+    db : config.database
+  })
 }));
-
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-
-
 
 // routes ======================================================================
 require('./routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
