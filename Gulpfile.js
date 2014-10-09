@@ -12,15 +12,15 @@ gulp.task('lint', function () {
     .pipe(jshint())
 });
 
-gulp.task('develop', function () {
+gulp.task('develop', ['browser'], function () {
   nodemon({ script: 'server', ext: 'html js' })
-    .on('change', ['lint'])
+    .on('change', ['browser'])
     .on('restart', function () {
       console.log('restarted!')
     })
 });
 
-gulp.task('scripts', function() {
+gulp.task('scripts', ['lint'], function() {
   gulp.src(['client/browser/js/main.js'])
     .pipe(browserify())
     .pipe(gulp.dest('./.build/js'));
