@@ -3,7 +3,6 @@ var gulp = require('gulp'),
   nodemon = require('gulp-nodemon'),
   jshint = require('gulp-jshint'),
   browserify = require('gulp-browserify'),
-  refresh = require('gulp-livereload'),
   watch = require('gulp-watch'),
   less = require('gulp-less'),
   rename = require('gulp-rename');
@@ -24,8 +23,7 @@ gulp.task('develop', ['browser'], function () {
 gulp.task('scripts', ['lint'], function() {
   gulp.src(['client/browser/js/main.js'])
     .pipe(browserify())
-    .pipe(gulp.dest('./.build/js'))
-    .pipe(refresh(server));
+    .pipe(gulp.dest('./.build/js'));
 });
 
 gulp.task('copy', function() {
