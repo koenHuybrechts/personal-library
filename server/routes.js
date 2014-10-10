@@ -1,7 +1,8 @@
 var pass = require('./config/pass'),
   search = require('./controllers/search'),
   media = require('./controllers/media'),
-  auth = require('./controllers/auth');
+  auth = require('./controllers/auth'),
+  person = require('./controllers/person');
 
 module.exports = function(app, passport) {
 
@@ -21,11 +22,11 @@ module.exports = function(app, passport) {
   app.post('/register', auth.register.process);
 
   app.get('/account', pass.ensureAuthenticated, function(req, res, next) {
-    console.log(req.user);
     res.send('Authenticated');
   });
 
   // API endpoints
   app.post('/api/search', search.query);
   app.post('/api/media', media.create);
+  app.get('/api/me', person.me);
 };
