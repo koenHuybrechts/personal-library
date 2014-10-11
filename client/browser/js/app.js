@@ -7,6 +7,12 @@ var MeModel = require('./models/me');
 
 module.exports = App = new Backbone.Marionette.Application();
 
+App.view = {};
+App.data = {
+  models: {},
+  collections: {}
+};
+
 App.addInitializer(function(options) {
   App.vent.trigger('app:log', 'App initialized');
 });
@@ -14,8 +20,8 @@ App.addInitializer(function(options) {
 App.on("before:start", function(options) {
   App.vent.trigger('app:log', 'Fire before:start');
 
-  var Me = new MeModel();
-  Me.fetch();
+  App.data.models.me = new MeModel();
+  App.data.models.me.fetch();
 
 });
 

@@ -13,7 +13,7 @@ gulp.task('lint', function () {
 });
 
 gulp.task('develop', ['browser'], function () {
-  nodemon({ script: 'server', ext: 'html js' })
+  nodemon({ script: 'server', ext: 'html js', ignore: ['./client'] })
     .on('change', ['browser'])
     .on('restart', function () {
       console.log('restarted!')
