@@ -1,6 +1,8 @@
 _           = require('underscore');
 Backbone    = require('backbone');
-Backbone.$  = $ = require('jquery');
+Backbone.$  = require('jquery');
+jQuery = $  = require('jquery');
+Bootstrap = require('./../../../bower_components/bootstrap/dist/js/bootstrap.js');
 Marionette  = require('backbone.marionette');
 
 var MeModel = require('./models/me'),

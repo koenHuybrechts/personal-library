@@ -13,7 +13,7 @@ gulp.task('lint', function () {
 });
 
 gulp.task('develop', ['browser'], function () {
-  nodemon({ script: 'server', ext: 'html js', ignore: ['./client'] })
+  nodemon({ script: 'server', ext: 'html hbs js', ignore: ['./client'] })
     .on('change', ['browser'])
     .on('restart', function () {
       console.log('restarted!')
@@ -29,6 +29,8 @@ gulp.task('scripts', ['lint'], function() {
 gulp.task('copy', function() {
   gulp.src(['client/browser/*.html'])
     .pipe(gulp.dest('./.build'));
+  gulp.src(['bower_components/bootstrap/dist/fonts/*'])
+    .pipe(gulp.dest('./.build/fonts'));
 });
 
 gulp.task('js', function () {
