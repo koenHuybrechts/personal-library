@@ -29,7 +29,7 @@ App.on("before:start", function(options) {
 });
 
 App.on("start", function(options) {
-  App.views.layout = new AppLayoutView();
+  App.views.layout = new AppLayoutView({model: App.data.models.me});
   App.views.layout.render();
 });
 

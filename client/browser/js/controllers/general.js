@@ -16,7 +16,7 @@ module.exports = GeneralController = {
             success: function() {
               App.data.collections.libraries.add(library);
 
-              App.views.general.dashboard = new DashboardView({model: {me: App.data.models.me, libraries: App.data.collections.libraries}});
+              App.views.general.dashboard = new DashboardView({model: App.data.collections.libraries});
 
               App.views.general.render();
               App.views.layout.menuRegion.empty();
