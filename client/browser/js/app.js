@@ -1,13 +1,14 @@
 _           = require('underscore');
 Backbone    = require('backbone');
-Backbone.$  = require('jquery');
+Backbone.$  = $ = require('jquery');
 Marionette  = require('backbone.marionette');
 
-var MeModel = require('./models/me');
+var MeModel = require('./models/me'),
+  AppLayoutView = require('./views/layout');
 
 module.exports = App = new Backbone.Marionette.Application();
 
-App.view = {};
+App.views = {};
 App.data = {
   models: {},
   collections: {}
@@ -26,7 +27,16 @@ App.on("before:start", function(options) {
 });
 
 App.on("start", function(options) {
-  Backbone.history.start();
+  App.views.layout = new AppLayoutView();
+  App.views.layout.render();
+});
+
+
+App.vent.bind('app:DomReady', function () {
+  if (Backbone.history){
+    Backbone.history.start();
+    console.log('history started');
+  }
 });
 
 App.vent.bind('app:log', function(msg) {

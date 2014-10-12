@@ -1,4 +1,4 @@
-var LibraryModel = require('./../models/library')
+var LibraryModel = require('./../models/library');
 
 module.exports = {
   //Return list of all libraries

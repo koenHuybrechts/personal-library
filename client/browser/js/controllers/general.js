@@ -9,14 +9,19 @@ module.exports = GeneralController = {
     App.data.collections.libraries = new LibrariesCollection();
     App.data.collections.libraries.fetch({
       success: function(libraries) {
-        console.log(libraries.length);
         if(libraries.length === 0) {
           App.vent.trigger('app:log', 'GeneralController: No libraries present');
           var library = new LibraryModel();
           library.save({
             success: function() {
-              console.log(this);
               App.data.collections.libraries.add(library);
+
+              App.views.general.dashboard = new DashboardView({model: {me: App.data.models.me, libraries: App.data.collections.libraries}});
+
+              App.views.general.render();
+              App.views.layout.menuRegion.empty();
+
+              App.views.layout.contentRegion.show(App.views.general);
             }
           });
 

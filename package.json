@@ -58,6 +58,7 @@
     "gulp-nodemon": "^1.0.4",
     "gulp-rename": "^1.2.0",
     "gulp-watch": "^1.0.7",
+    "hbsfy": "^2.2.0",
     "mocha": "^1.21.4",
     "nodemon": "^1.2.1",
     "passport": "^0.2.1",
@@ -65,7 +66,8 @@
   },
   "browserify": {
     "transform": [
-      "browserify-shim"
+      "browserify-shim",
+      "hbsfy"
     ]
   },
   "browserify-shim": {
