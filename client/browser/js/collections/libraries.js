@@ -1,3 +1,3 @@
-module.exports = LibraryModel = Backbone.Collection.extend({
+module.exports = LibrariesCollection = Backbone.Collection.extend({
   url: '/api/libraries'
 });

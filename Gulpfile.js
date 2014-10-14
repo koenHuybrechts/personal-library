@@ -8,16 +8,16 @@ var gulp = require('gulp'),
   rename = require('gulp-rename'),
   del = require('del');
 
-gulp.task('develop', function () {
+gulp.task('develop', ['browser'], function () {
   nodemon({ script: 'server', ext: 'html js', ignore: ['./client'] })
     .on('start', ['watch'])
-    .on('change', ['watch'])
+    .on('change', ['clean'])
     .on('restart', function () {
       console.log('restarted!')
     })
 });
 
-gulp.task('scripts', ['js', 'clean'], function() {
+gulp.task('scripts', ['js'], function() {
   gulp.src(['client/browser/js/main.js'])
     .pipe(browserify())
     .pipe(gulp.dest('./.build/js'));
@@ -53,4 +53,4 @@ gulp.task('clean', function(cb) {
   del(['./.build'], cb);
 });
 
-gulp.task('browser', ['scripts', 'less']);
+gulp.task('browser', ['scripts', 'less', 'copy']);
