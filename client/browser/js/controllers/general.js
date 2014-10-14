@@ -17,15 +17,18 @@ module.exports = GeneralController = {
               App.data.collections.libraries.add(library);
 
               App.views.general.dashboard = new DashboardView({model: App.data.collections.libraries});
+              App.views.general.dashboard.render();
 
-              App.views.general.render();
-              App.views.layout.menuRegion.empty();
-
-              App.views.layout.contentRegion.show(App.views.general);
+              App.views.layout.contentRegion.show(App.views.general.dashboard);
             }
           });
 
         }
+
+        App.views.general.dashboard = new DashboardView({model: App.data.collections.libraries});
+        App.views.general.dashboard.render();
+
+        App.views.layout.contentRegion.show(App.views.general.dashboard);
       }
     });
   }

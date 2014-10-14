@@ -15,6 +15,7 @@ App.data = {
   models: {},
   collections: {}
 };
+App.views.general = {};
 
 App.addInitializer(function(options) {
   App.vent.trigger('app:log', 'App initialized');
