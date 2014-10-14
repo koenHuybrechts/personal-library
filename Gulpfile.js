@@ -5,32 +5,22 @@ var gulp = require('gulp'),
   browserify = require('gulp-browserify'),
   watch = require('gulp-watch'),
   less = require('gulp-less'),
-  rename = require('gulp-rename');
+  rename = require('gulp-rename'),
+  del = require('del');
 
-gulp.task('lint', function () {
-  gulp.src('./**/*.js')
-    .pipe(jshint())
-});
-
-gulp.task('develop', ['browser'], function () {
-  nodemon({ script: 'server', ext: 'html hbs js', ignore: ['./client'] })
-    .on('change', ['browser'])
+gulp.task('develop', function () {
+  nodemon({ script: 'server', ext: 'html js', ignore: ['./client'] })
+    .on('start', ['watch'])
+    .on('change', ['watch'])
     .on('restart', function () {
       console.log('restarted!')
     })
 });
 
-gulp.task('scripts', ['lint'], function() {
+gulp.task('scripts', ['js', 'clean'], function() {
   gulp.src(['client/browser/js/main.js'])
     .pipe(browserify())
     .pipe(gulp.dest('./.build/js'));
-});
-
-gulp.task('copy', function() {
-  gulp.src(['client/browser/*.html'])
-    .pipe(gulp.dest('./.build'));
-  gulp.src(['bower_components/bootstrap/dist/fonts/*'])
-    .pipe(gulp.dest('./.build/fonts'));
 });
 
 gulp.task('js', function () {
@@ -46,8 +36,21 @@ gulp.task('less', function(){
     .pipe(gulp.dest('./.build/css'));
 });
 
-gulp.task('watch', function () {
-  gulp.watch('client/browser/js/*.js', ['browser']);
+gulp.task('copy', function() {
+  gulp.src(['client/browser/*.html'])
+    .pipe(gulp.dest('./.build'));
+  gulp.src(['bower_components/bootstrap/dist/fonts/*'])
+    .pipe(gulp.dest('./.build/fonts'));
 });
 
-gulp.task('browser', ['scripts', 'less', 'copy']);
+gulp.task('watch', function () {
+  gulp.watch('client/browser/*.html', ['copy']);
+  gulp.watch('client/browser/**', ['browser']);
+});
+
+gulp.task('clean', function(cb) {
+  // You can use multiple globbing patterns as you would with `gulp.src`
+  del(['./.build'], cb);
+});
+
+gulp.task('browser', ['scripts', 'less']);
