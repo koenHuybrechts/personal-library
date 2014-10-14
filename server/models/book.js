@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
   ObjectId = Schema.ObjectId,
   uniqueValidator = require('mongoose-unique-validator');
 
-var MediaSchema = new mongoose.Schema({
+var BookSchema = new mongoose.Schema({
   googleId: {
     type: String,
     unique: true
@@ -11,6 +11,6 @@ var MediaSchema = new mongoose.Schema({
   status: String
 });
 
-MediaSchema.plugin(uniqueValidator);
+BookSchema.plugin(uniqueValidator);
 
-module.exports = MediaModel = mongoose.model('Media', MediaSchema);
+module.exports = BookSchema = mongoose.model('Book', BookSchema);

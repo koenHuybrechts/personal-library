@@ -11,7 +11,7 @@ var gulp = require('gulp'),
 gulp.task('develop', ['browser'], function () {
   nodemon({ script: 'server', ext: 'html js', ignore: ['./client'] })
     .on('start', ['watch'])
-    .on('change', ['clean'])
+    //.on('change', ['clean'])
     .on('restart', function () {
       console.log('restarted!')
     })
