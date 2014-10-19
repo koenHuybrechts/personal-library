@@ -28,6 +28,7 @@ module.exports = function(app, passport) {
 
   // API endpoints
   app.post('/api/search', search.query);
+  app.get('/api/search', search.query);
   app.post('/api/books', book.create);
   app.get('/api/me', person.me);
 

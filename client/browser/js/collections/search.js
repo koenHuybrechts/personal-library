@@ -1,20 +1,21 @@
 var BookModel = require('../models/book');
 
-module.exports = BooksCollection = Backbone.Collection.extend({
+module.exports = SearchCollection = Backbone.Collection.extend({
   model: BookModel,
   url: function(){
-    var url = '/api/books';
-
     console.log(this.keywords);
 
-    if(typeof this.keywords !== 'undefined') {
-      url + '/' + this.keywords;
-    }
-    return url;
+    return '/api/search?q=' + this.keywords;
+  },
+  parse: function(response) {
+    this.totalItems = response.totalItems;
+    return response.items;
   }
 }, {
   search: function(keywords) {
-    var results = new BooksCollection();
+    App.vent.trigger('app:log', 'SearchCollection.Search');
+
+    var results = new SearchCollection();
     results.keywords = keywords;
     results.fetch({
       success: function(){
